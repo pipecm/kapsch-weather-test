@@ -1,1 +1,43 @@
-spring.application.name=weather
+spring:
+  application:
+    name: forecast-app
+  #datasource:
+  #  driverClassName: com.mysql.cj.jdbc.Driver
+  #  url: ${DB_URL:jdbc:mysql://localhost:3306/forecast_archive}
+  #  username: ${DB_USER:forecast_app}
+  #  password: ${DB_PASSWORD:kapsch}
+  datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:forecastapp;DB_CLOSE_DELAY=-1
+    username: forecastapp
+    password: kapsch
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  data:
+    jpa:
+      repositories:
+        enabled: true
+  #sql:
+  #  init:
+  #    data-locations: classpath:/database/data.sql
+
+client:
+  forecast-source:
+    url: https://api.open-meteo.com/v1/
+    timeout: 10
+    currentWeather: true
+
+server:
+  port: 8080
+  servlet:
+    context-path: /forecast-app/v1
+
+management:
+  endpoint:
+    health:
+      show-details: always

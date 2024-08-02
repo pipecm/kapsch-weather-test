@@ -1,11 +1,16 @@
 package net.kapsch.weather.entity;
 
 import jakarta.persistence.*;
-import lombok.ToString;
+import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Data
+@Builder
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "forecast_response_data_record")
 public class ForecastResponseDataRecord {
 
@@ -22,6 +27,12 @@ public class ForecastResponseDataRecord {
 
     @Column
     private int windDirection;
+
+    @Column(name =  "local_timestamp")
+    private LocalDateTime localTimestamp;
+
+    @Column(name = "utc_timestamp")
+    private LocalDateTime utcTimestamp;
 
     @ManyToOne
     @JoinColumn(name = "forecast_request_id", nullable = false)

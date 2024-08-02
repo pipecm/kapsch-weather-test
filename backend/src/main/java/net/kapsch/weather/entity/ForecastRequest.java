@@ -1,12 +1,16 @@
 package net.kapsch.weather.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+@Data
+@Builder
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "forecast_request")
 public class ForecastRequest {
 
@@ -21,12 +25,7 @@ public class ForecastRequest {
     @Column
     private double longitude;
 
-    @Column(name =  "local_timestamp")
-    private LocalDateTime localTimestamp;
-
-    @Column(name = "utc_timestamp")
-    private LocalDateTime utcTimestamp;
-
+    @ToString.Exclude
     @OneToMany(mappedBy = "forecastRequest", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ForecastResponseDataRecord> responseData;
 }
