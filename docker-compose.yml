@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  forecast-app:
+    container_name: forecast-app
+    build:
+      context: backend
+      dockerfile: docker/Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      forecast-app-db:
+        condition: service_healthy
+    restart: on-failure
+    links:
+      - forecast-app-db
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      DB_URL: jdbc:mysql://forecast-app-db:3306/forecast-app
+      DB_USER: forecast_app
+      DB_PASSWORD: kapsch
+
+  forecast-app-db:
+    container_name: forecast-app-db
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: kapschadmin
+      MYSQL_DATABASE: forecast-app
+      MYSQL_USER: forecast_app
+      MYSQL_PASSWORD: kapsch
+    ports:
+      - 3306:3306
+    volumes:
+      - ./backend/src/main/resources/database:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 20s
+      retries: 10

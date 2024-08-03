@@ -28,10 +28,10 @@ public class ForecastResponseDataRecord {
     @Column
     private int windDirection;
 
-    @Column(name =  "local_timestamp")
+    @Column(name =  "local_request_dt")
     private LocalDateTime localTimestamp;
 
-    @Column(name = "utc_timestamp")
+    @Column(name = "utc_request_dt")
     private LocalDateTime utcTimestamp;
 
     @ManyToOne
