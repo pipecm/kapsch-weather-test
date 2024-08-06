@@ -27,7 +27,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: kapschadmin
-      MYSQL_DATABASE: forecast-app
+      MYSQL_DATABASE: forecast_app
       MYSQL_USER: forecast_app
       MYSQL_PASSWORD: kapsch
     ports:

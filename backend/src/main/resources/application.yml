@@ -3,13 +3,13 @@ spring:
     name: forecast-app
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: ${DB_URL:jdbc:mysql://localhost:3306/forecast-app}
+    url: ${DB_URL:jdbc:mysql://localhost:3306/forecast_app}
     username: ${DB_USER:forecast_app}
     password: ${DB_PASSWORD:kapsch}
   jpa:
     defer-datasource-initialization: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect

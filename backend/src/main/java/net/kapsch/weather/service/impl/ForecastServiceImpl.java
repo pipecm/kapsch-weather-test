@@ -45,10 +45,14 @@ public class ForecastServiceImpl implements ForecastService {
 
     @Override
     public Mono<Resource> generateForecastFile(ForecastRequestDto forecastRequestDto) {
-        return forecastSourceApiClient
-                .retrieve(forecastRequestDto.getLatitude(), forecastRequestDto.getLongitude())
-                .map(this::saveForecastData)
-                .map(this::generateCsvFile);
+        try {
+            return forecastSourceApiClient
+                    .retrieve(forecastRequestDto.getLatitude(), forecastRequestDto.getLongitude())
+                    .map(this::saveForecastData)
+                    .map(this::generateCsvFile);
+        } catch (Exception e) {
+            throw new ForecastAppException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        }
     }
 
     @Transactional

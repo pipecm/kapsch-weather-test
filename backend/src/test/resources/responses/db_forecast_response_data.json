@@ -1,0 +1,54 @@
+[
+  {
+    "recordId": "2b120721-470d-4cfe-a671-109388c6a251",
+    "localTimestamp": "2024-08-05T15:36:09.884388",
+    "temperature": 8.9,
+    "utcTimestamp": "2024-08-05T19:36:09.884430",
+    "windDirection": 236,
+    "windSpeed": 3.9,
+    "forecastRequest" :  {
+      "requestId": "6f643d1a-8853-464d-b1eb-29cb5ad9eb27",
+      "latitude": -33.5,
+      "longitude": -70.625
+    }
+  },
+  {
+    "recordId": "6ee78bdd-6098-4cc3-ab7c-7fe4bc203b5c",
+    "localTimestamp": "2024-08-05T15:35:47.852591",
+    "temperature": 8.9,
+    "utcTimestamp": "2024-08-05T19:35:47.852623",
+    "windDirection": 236,
+    "windSpeed": 3.9,
+    "forecastRequest" : {
+      "requestId": "acaa8400-caab-4095-907c-657ac4dde3b8",
+      "latitude": -33.5,
+      "longitude": -70.625
+    }
+  },
+  {
+    "recordId": "aec257cf-3ba0-48db-99aa-aa3ea8a2d940",
+    "localTimestamp": "2024-08-05T15:36:04.166866",
+    "temperature": 8.9,
+    "utcTimestamp": "2024-08-05T19:36:04.166885",
+    "windDirection": 236,
+    "windSpeed": 3.9,
+    "forecastRequest" : {
+      "requestId": "f94d2b0c-54c6-477b-a1d4-b8134fa266c4",
+      "latitude": -33.5,
+      "longitude": -70.625
+    }
+  },
+  {
+    "recordId": "c5ca6354-d182-4693-8ad7-ea0923326a49",
+    "localTimestamp": "2024-08-05T15:35:54.004264",
+    "temperature": 8.9,
+    "utcTimestamp": "2024-08-05T19:35:54.004330",
+    "windDirection": 236,
+    "windSpeed": 3.9,
+    "forecastRequest" : {
+      "requestId": "ff09cb7f-ec64-4194-8b44-fb7cff1f7fc3",
+      "latitude": -33.5,
+      "longitude": -70.625
+    }
+  }
+]
