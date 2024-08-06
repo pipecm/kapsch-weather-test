@@ -1,10 +1,7 @@
 package net.kapsch.weather.service.impl;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.opencsv.CSVReader;
-import lombok.extern.log4j.Log4j2;
+import net.kapsch.weather.ForecastApplicationBaseTest;
 import net.kapsch.weather.client.ForecastSourceApiClient;
 import net.kapsch.weather.client.response.ForecastSourceApiResponse;
 import net.kapsch.weather.dto.ForecastRequestDto;
@@ -13,7 +10,6 @@ import net.kapsch.weather.entity.ForecastResponseDataRecord;
 import net.kapsch.weather.exception.ForecastAppException;
 import net.kapsch.weather.repository.ForecastRequestRepository;
 import net.kapsch.weather.repository.ForecastResponseDataRepository;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -35,24 +31,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-@Log4j2
 @ExtendWith(MockitoExtension.class)
-class ForecastServiceImplTest {
-    private static final double LATITUDE_SCL = -33.5;
-    private static final double LONGITUDE_SCL = -70.625;
-
-    private static final UUID REQUEST_ID = UUID.fromString("eeb26662-7469-46db-b691-6719215e68fe");
-    private static final UUID RESPONSE_DATA_ID = UUID.fromString("231ba4f7-bddb-4b93-b033-0fcdb6b84f08");
-
-    private static final String API_RESPONSE_PATH = "src/test/resources/responses/api_response_scl.json";
-    private static final String REQUEST_FROM_DB_PATH = "src/test/resources/responses/db_forecast_request.json";
-    private static final String RESPONSE_DATA_FROM_DB_PATH = "src/test/resources/responses/db_forecast_response_data.json";
-    private static final String EXPECTED_CSV_PATH = "src/test/resources/responses/forecast_file_scl.csv";
-    private static final String API_EXCEPTION_MSG = "API Error";
-    private static final String REPO_EXCEPTION_MSG = "Error retrieving data";
-    private static final String NO_EXCEPTION_THROWN = "No exception thrown";
-
-    private static final int CSV_LINES = 4;
+class ForecastServiceImplTest extends ForecastApplicationBaseTest {
 
     @Mock
     private ForecastRequestRepository forecastRequestRepository;
@@ -65,14 +45,6 @@ class ForecastServiceImplTest {
 
     @InjectMocks
     private ForecastServiceImpl forecastService;
-
-    private static ObjectMapper objectMapper;
-
-    @BeforeAll
-    protected static void init() {
-        objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
-    }
 
     @Test
     void whenGeneratingCsvFileThenCsvFileIsGeneratedOK() throws Exception {
@@ -111,7 +83,6 @@ class ForecastServiceImplTest {
                     .thenReturn(Optional.of(responseRecordsFromDb.get(i)));
         }
 
-        //Resource expectedCsvResource = new InputStreamResource(new FileInputStream(EXPECTED_CSV_PATH));
         Resource expectedCsvResource = new ByteArrayResource(new FileInputStream(EXPECTED_CSV_PATH).readAllBytes());
 
         StepVerifier
@@ -184,31 +155,5 @@ class ForecastServiceImplTest {
         verify(forecastRequestRepository).save(any(ForecastRequest.class));
         verify(forecastResponseDataRepository).save(any(ForecastResponseDataRecord.class));
         verify(forecastRequestRepository).findByLatitudeAndLongitude(LATITUDE_SCL, LONGITUDE_SCL);
-    }
-
-    private <T> T readFile(String filePath, TypeReference<T> typeReference) throws Exception {
-        return objectMapper.readValue(new File(filePath), typeReference);
-    }
-
-    private void assertCsvContentsAreEqual(Resource expected, Resource actual) {
-        try {
-            assertThat(readCsvContents(expected.getInputStream())).containsAll(readCsvContents(actual.getInputStream()));
-        } catch (IOException e) {
-            log.error(e.getMessage());
-        }
-    }
-
-    private List<List<String>> readCsvContents(InputStream inputStream)  {
-        List<List<String>> records = new ArrayList<>();
-        try (CSVReader csvReader = new CSVReader(new InputStreamReader(inputStream));) {
-            String[] values = null;
-            while ((values = csvReader.readNext()) != null) {
-                records.add(Arrays.asList(values));
-            }
-        } catch (Exception e) {
-            log.error(e.getMessage());
-        }
-
-        return records;
     }
 }

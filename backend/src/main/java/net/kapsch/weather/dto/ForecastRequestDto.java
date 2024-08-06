@@ -15,8 +15,8 @@ public class ForecastRequestDto {
     @JsonProperty("request_id")
     private UUID requestId;
 
-    private double latitude;
+    private Double latitude;
 
-    private double longitude;
+    private Double longitude;
 
 }

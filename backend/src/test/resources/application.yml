@@ -17,3 +17,9 @@ spring:
     jpa:
       repositories:
         enabled: true
+
+client:
+  forecast-source:
+    url: https://api.open-meteo.com/v1/
+    timeout: 10
+    currentWeather: true
