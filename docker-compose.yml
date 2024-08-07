@@ -14,10 +14,9 @@ services:
     restart: on-failure
     links:
       - forecast-app-db
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+    command: ['catalina.sh', 'run']
     environment:
-      DB_URL: jdbc:mysql://forecast-app-db:3306/forecast-app
+      DB_URL: jdbc:mysql://forecast-app-db:3306/forecast_app
       DB_USER: forecast_app
       DB_PASSWORD: kapsch
 

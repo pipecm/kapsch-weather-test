@@ -17,20 +17,15 @@ spring:
     jpa:
       repositories:
         enabled: true
-  #sql:
-  #  init:
-  #    data-locations: classpath:/database/data.sql
+  sql:
+    init:
+      data-locations: classpath:/database/data.sql
 
 client:
   forecast-source:
     url: https://api.open-meteo.com/v1/
     timeout: 10
     currentWeather: true
-
-server:
-  port: 8080
-  servlet:
-    context-path: /forecast-app/v1
 
 management:
   endpoint:

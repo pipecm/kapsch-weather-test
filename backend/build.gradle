@@ -3,6 +3,8 @@ plugins {
 	id 'org.springframework.boot' version '3.3.2'
 	id 'io.spring.dependency-management' version '1.1.6'
 	id 'jacoco'
+	id 'war'
+	id 'name.remal.sonarlint' version '4.2.1'
 }
 
 group = 'net.kapsch'
@@ -28,6 +30,8 @@ dependencies {
 
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
 	runtimeOnly 'mysql:mysql-connector-java:8.0.33'
 	runtimeOnly 'com.h2database:h2'
@@ -88,3 +92,4 @@ jacocoTestCoverageVerification {
 }
 
 check.dependsOn jacocoTestCoverageVerification
+sonarLint.nodeJs.logNodeJsNotFound = false
