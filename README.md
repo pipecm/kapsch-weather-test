@@ -121,11 +121,36 @@ curl --location --request POST 'http://localhost:8080/forecast-app/v1/forecast' 
 --data '{
     "latitude": {latitude},
     "longitude": {longitude}
-}' > {filename}.csv
+}'
 ```
 
 | Parameter | Description                     | Mandatory | Default value |
 |-----------|-----------------------------------------------|-------|-----|
 | latitude  | Latitude of the location queried (in degrees) | true  | N/A |
 | longitude | Latitude of the location queried (in degrees) | true  | N/A |
-| filename  | CSV filename                                  | false | N/A |
+
+### Response codes
+| Code | Description           | 
+|------|-----------------------|
+| 200  | Success response (OK) | 
+| 400  | Bad Request           | 
+| 500  | Internal Server Error | 
+
+### Sample success response
+```csv
+Local timestamp,UTC timestamp,Latitude,Longitude,Temperature (°C),Wind speed (km/h),Wind direction (°)
+2024-08-07T19:05:18.958591,2024-08-07T19:05:18.958619,-33.5,-70.625,10.9,6.3,204
+2024-08-07T19:10:51.172171,2024-08-07T19:10:51.172208,-33.5,-70.625,10.9,6.3,204
+2024-08-07T19:04:39.293515,2024-08-07T19:04:39.293538,-33.5,-70.625,10.9,6.3,204
+2024-08-07T18:06:39.020760,2024-08-07T18:06:39.020793,-33.5,-70.625,10.8,4.6,231
+```
+
+### Sample error response
+```json
+{
+    "code": 400,
+    "status": "BAD_REQUEST",
+    "message": "Bad Request: Latitude and longitude are required"
+}
+```
+© Created by [Felipe Cardenas](https://www.linkedin.com/in/felipecardenasm) in August 2024. All rights reserved.
