@@ -41,15 +41,16 @@ kapsch-weather-test/backend/build/libs/forecast-app-0.0.1-SNAPSHOT.war
 
 ### Overview
 For deploying locally, it is possible performing it using Docker Compose. It creates and runs the following containers:
+* An Angular container with the frontend layer of the application.
 * A Tomcat container with the backend WAR file deployed inside it.
 * A MySQL container that hosts the database of the application.
 
 ### Prerequisites
 
-* Java 21 or above
 * Docker CLI (with Docker Compose)
 * Git
-* Postman (or similar)
+* An internet browser
+* Postman or similar
 
 ### Steps
 
@@ -113,7 +114,18 @@ Password: kapsch
 ```
 
 ## CSV file generation
-After deployment, you can generate CSV files based in the full history of requests performed to this API. To generate a new CSV file, run the following cURL:
+After deployment, you can generate CSV files based in the full history of requests performed to this API. 
+
+### Generation via GUI 
+To generate a new CSV file using the GUI, go to the following URL in your browser:
+```
+http://localhost:4200
+```
+Enter the latitude and longitude in the form and then, press the button `Generate CSV Forecast File`
+After that, the CSV file is downloaded to your local environment.
+
+### Generation via cURL
+To generate a new CSV file via CLI or Postman, run the following cURL:
 
 ```
 curl --location --request POST 'http://localhost:8080/forecast-app/v1/forecast' \
