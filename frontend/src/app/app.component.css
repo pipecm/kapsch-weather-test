@@ -1,0 +1,47 @@
+* {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.title {
+    text-align: center;
+}
+
+.form-section, .button-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.forecast-form {
+    width: 270px;
+    height: 100px;
+    border: 1px;
+    border-color: black;
+    border-radius: 25px;
+    border-style: solid;
+    padding: 25px;
+}
+
+.form-field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button {
+    border: 1px;
+    border-color: rgb(0, 110, 255);
+    background-color: rgb(0, 110, 255);
+    font-weight: bold;
+    color: white;
+    border-style: solid;
+    border-radius: 20px;
+    padding: 10px;
+}

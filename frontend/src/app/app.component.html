@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="title">
+    <h1>Forecast CSV File Generator - Kapsch TrafficCom</h1>
+  </div>
+  <div class="form-section">
+    <div class="forecast-form">
+      <form (submit)="createPost()">
+        <div class="form-field">
+          <label>Latitude</label>
+          <input type="text" [(ngModel)]="postData.latitude" name="latitude" required>
+        </div>
+        <br>
+        <div class="form-field">
+          <label>Longitude</label>
+          <input type="text" [(ngModel)]="postData.longitude" name="longitude" required>
+        </div>
+        <br>
+        <div class="button-area">
+          <button type="submit">Generate CSV Forecast File</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
